@@ -1,0 +1,23 @@
+<div class="p-p-3">
+  <p-card>
+    <p-table [value]="server" styleClass="p-datatable-lg">
+      <ng-template pTemplate="caption"> ARK Server Liste </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Server</th>
+          <th>Name</th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-server>
+        <tr>
+          <td>{{ server.server }}</td>
+          <td>{{ server.name }}</td>
+          <td>
+            <a [href]="transform(server['link'])" pButton pRipple class="p-button-outlined p-button-success" target="_blank">JOIN</a>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+</div>

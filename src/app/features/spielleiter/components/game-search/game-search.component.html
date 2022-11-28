@@ -1,0 +1,476 @@
+<div *ngIf="dev" class="m-2 antiselect flex align-items-center justify-content-center">
+  <span class="px-2 mx-1 mr-3 border-round-3xl" style="background-color: #000">{{siteStatus}}</span>
+  <span class="px-2 mx-1 border-round-3xl" style="background-color: #e36223; box-shadow: #e36223 0px 0px 2.5px 1px; text-transform: uppercase" (click)="siteStatus = 'ready'">Spielvorschlag</span>
+  <span class="px-2 mx-1 border-round-3xl" style="background-color: var(--blue-600)" (click)="siteStatus = 'loading'">Loading</span>
+  <span class="px-2 mx-1 border-round-3xl" style="background-color: #dd0000" (click)="siteStatus = 'error'">Error</span>
+</div>
+
+<div *ngIf="siteStatus == 'loading'" class="flex flex-column align-items-center justify-content-center gap-8" style="flex: 1">
+  <span style="margin: 2.5rem" class="pulsing-2"></span>
+  <div style="width: 80%">
+      <p-progressBar [style]="{ height: '3rem' }" [value]="loadingPercent"></p-progressBar>
+  </div>
+</div>
+
+<div *ngIf="siteStatus == 'error' || (siteStatus != 'error' && siteStatus != 'loading' && siteStatus != 'ready')" class="flex flex-column align-items-center justify-content-center" style="flex: 1" [@fadeInGrow]>
+  <div onclick="window.location.reload();" class="flex flex-row align-items-center border-1 border-round border-gray-500 p-3" style="background-color: #dd0000; width: auto; cursor: pointer">
+    <i class="mdi mdi-alert-circle-outline mr-3" style="font-size: 2rem"></i>
+    <span class="flex flex-column">
+      <b>Ein Fehler ist aufgetreten!</b>
+      <!-- <b>Bitte lade die Seite neu.</b> -->
+    </span>
+  </div>
+</div>
+
+<div *ngIf="siteStatus == 'ready'" [@fadeInGrow]>
+  <div class="border-round" style="background-color: hwb(0 50% 50% / 0.15)">
+    <div class="search-container">
+      <div class="search-group">
+        <div class="p-1">
+          <div class="border-1 border-round border-gray-500 p-1">
+            <!-- Spielerauswahl Firebase -->
+            <!-- <p-multiSelect
+              [options]="accounts"
+              [(ngModel)]="filterSelectedAccounts"
+              defaultLabel="Mitspieler auswählen"
+              [selectedItemsLabel]="'{0} ausgewählt'"
+              emptyMessage="Hier ist es zeimlich leer.. Schau später nochmal vorbei"
+              emptyFilterMessage="Unter diesem Namen wurde nichts gefunden"
+              optionDisabled="locked.locked"
+              scrollHeight="400px"
+            >
+              <ng-template let-value pTemplate="selectedItems">
+                <div *ngIf="!filterSelectedAccounts || filterSelectedAccounts.length === 0 || (filterSelectedAccounts.length === 1 && findIdInArray(filterSelectedAccounts, user!.id)); else usernames">
+                  Mitspieler auswählen
+                </div>
+                <ng-template #usernames>
+                  <span class="mr-2" *ngFor="let option of filterSelectedAccounts">
+                    <img
+                      [src]="option.avatar_url ? option.avatar_url : 'assets/images/icons/user.png'"
+                      class="border-round antiselect"
+                      [ngClass]="option.avatar_url ? 'profile-image-background' : ''"
+                      style="height: 1em; width: auto"
+                      alt="Avatar"
+                      pTooltip="{{ option.username }}"
+                      tooltipPosition="top"
+                    />
+                    <span *ngIf="filterSelectedAccounts.length < 7">
+                      {{ option.id === user!.id ? 'Du' : option.username }}
+                    </span>
+                  </span>
+                </ng-template>
+              </ng-template>
+
+              <ng-template let-account pTemplate="item">
+                <div class="flex">
+                  <img
+                    [src]="account.avatar_url ? account.avatar_url : 'assets/images/icons/user.png'"
+                    class="ml-3 mr-3 border-round antiselect"
+                    [ngClass]="account.avatar_url ? 'profile-image-background' : ''"
+                    style="width: 45px; height: 45px"
+                    alt="Avatar"
+                  />
+                  <div class="mr-0 md:mr-8">
+                    <span class="text-900">{{ account.username }}</span>
+                    <span class="block text-600 font-medium mb-1">
+                      <span>{{ account.vorname }}</span>
+                      <span *ngIf="account.nachname !== ''" class="ml-2">{{ account.nachname[0] }}.</span>
+                    </span>
+                  </div>
+                </div>
+              </ng-template>
+            </p-multiSelect> -->
+            <!-- Spielerauswahl Firebase -->
+
+            <!-- Spielerauswahl Cyved -->
+            <p-multiSelect
+              [options]="cyvedAccounts"
+              [(ngModel)]="filterSelectedCyvedAccounts"
+              defaultLabel="Mitspieler auswählen"
+              [selectedItemsLabel]="'{0} ausgewählt'"
+              emptyMessage="Hier ist es zeimlich leer.. Schau später nochmal vorbei"
+              emptyFilterMessage="Unter diesem Namen wurde nichts gefunden"
+              optionDisabled="locked.locked"
+              scrollHeight="400px"
+            >
+              <ng-template let-value pTemplate="selectedItems">
+                <div
+                  *ngIf="
+                    !filterSelectedCyvedAccounts ||
+                      filterSelectedCyvedAccounts.length === 0 ||
+                      (filterSelectedCyvedAccounts.length === 1 && findIdInArray(filterSelectedCyvedAccounts, myCyvedAccount!.id));
+                    else usernames
+                  "
+                >
+                  Mitspieler auswählen
+                </div>
+                <ng-template #usernames>
+                  <span class="mr-2" *ngFor="let option of filterSelectedCyvedAccounts">
+                    <img
+                      [src]="option.avatar_url ? option.avatar_url : 'assets/images/icons/user.png'"
+                      class="border-round antiselect"
+                      [ngClass]="option.avatar_url ? 'profile-image-background' : ''"
+                      style="height: 1em; width: auto"
+                      alt="Avatar"
+                      pTooltip="{{ option.anmeldename }}"
+                      tooltipPosition="top"
+                    />
+                    <span *ngIf="filterSelectedCyvedAccounts.length < 7">
+                      {{ option.id === myCyvedAccount!.id ? 'Du' : option.anmeldename }}
+                    </span>
+                  </span>
+                </ng-template>
+              </ng-template>
+
+              <ng-template let-account pTemplate="item">
+                <div class="flex">
+                  <img
+                    [src]="account.avatar_url ? account.avatar_url : 'assets/images/icons/user.png'"
+                    class="ml-3 mr-3 border-round antiselect"
+                    [ngClass]="account.avatar_url ? 'profile-image-background' : ''"
+                    style="width: 45px; height: 45px"
+                    alt="Avatar"
+                  />
+                  <div class="mr-0 md:mr-8">
+                    <span class="text-900">{{ account.anmeldename }}</span>
+                    <span class="block text-600 font-medium mb-1">
+                      <span>{{ account.vorname }}</span>
+                      <!-- <span *ngIf="account.nachname !== ''" class="ml-2">{{ account.nachname[0] }}.</span> -->
+                    </span>
+                  </div>
+                </div>
+              </ng-template>
+            </p-multiSelect>
+            <!-- Spielerauswahl Cyved -->
+          </div>
+        </div>
+        <div class="p-1">
+          <div class="border-1 border-round border-gray-500 p-1">
+            <span>TODO</span>
+
+            <!-- Min-Max Spieler bei Spiel -->
+            <!-- <div class="mb-1">
+              <div class=""></div>
+
+              <div style="display: none;" class="mb-1">
+                <span class="relative text-center" [ngStyle]="{
+                                      left: (filterSelectedPlayerCount[0] - 1) * (100 / 20) + '%'
+                                    }">{{ filterSelectedPlayerCount[0] }}</span>
+                <span class="relative text-center" *ngIf="filterSelectedPlayerCount[0] !== filterSelectedPlayerCount[1]" [ngStyle]="{
+                                      left: (filterSelectedPlayerCount[1] - 1) * (100 / 20) + '%'
+                                    }">{{ filterSelectedPlayerCount[1] }}</span>
+              </div>
+              <div class="px-2 mb-1">
+                <p-slider [(ngModel)]="filterSelectedPlayerCount" [min]="1" [max]="20" [step]="1" [range]="true"></p-slider>
+              </div> -->
+            <!-- <p-slider [(ngModel)]="filterSelectedPlayerCount" [min]="1" [max]="accounts.length" [step]="1" [animate]="true" [range]="true"></p-slider> -->
+            <!-- </div> -->
+            <!-- Min-Max Spieler bei Spiel -->
+          </div>
+        </div>
+      </div>
+      <div class="search-group">
+        <div class="p-1">
+          <div class="border-1 border-round border-gray-500 p-1">
+            <!-- Genres -->
+            <p-multiSelect
+              [options]="genres"
+              [(ngModel)]="filterSelectedGenres"
+              defaultLabel="Genres auswählen"
+              optionLabel="name"
+              emptyMessage="Hier ist es zeimlich leer.. Schau später nochmal vorbei"
+              emptyFilterMessage="Unter diesem Namen wurde nichts gefunden"
+              [selectedItemsLabel]="'{0} ausgewählt'"
+              scrollHeight="400px"
+            >
+            </p-multiSelect>
+            <!-- Genres -->
+          </div>
+        </div>
+        <div class="p-1">
+          <div class="border-1 border-round border-gray-500 p-1">
+            <!-- Plattform -->
+            <p-multiSelect
+              [options]="plattforms"
+              [(ngModel)]="filterSelectedPlattforms"
+              defaultLabel="Plattformen auswählen"
+              optionLabel="name"
+              emptyMessage="Hier ist es zeimlich leer.. Schau später nochmal vorbei"
+              emptyFilterMessage="Unter diesem Namen wurde nichts gefunden"
+              [selectedItemsLabel]="'{0} ausgewählt'"
+              scrollHeight="400px"
+            >
+            </p-multiSelect>
+            <!-- Plattform -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="my-3 flex justify-content-center antiselect">
+    <div
+      pRipple
+      (click)="start()"
+      [ngStyle]="{
+        opacity: getSelectedAccountLenght() < 2 ? '0.45' : '1'
+      }"
+      class="px-4 border-1 border-round surface-border flex justify-content-center align-items-center text-center font-medium cursor-pointer transition-all transition-duration-1000"
+      style="min-height: 3rem; width: 100%; background-color: #e36223; box-shadow: #e36223 0px 0px 9px 0px; color: white; text-transform: uppercase"
+    >
+      <div class="flex align-items-center">
+        <i class="mdi mdi-magnify mr-3" style="font-size: 2rem"></i>
+        <span>Spielvorschlag</span>
+      </div>
+    </div>
+  </div>
+
+  <main id="spiele" *ngIf="view" [@fadeInGrow]>
+    <div style="*background-color: #333 !important" class="border-1 border-round surface-border">
+      <p-dataView #spieleView [value]="viewSpiele" layout="grid" [paginator]="true" [rows]="24" [sortField]="viewSortField" [sortOrder]="viewSortOrder" filterBy="spiel.spiel.name">
+        <ng-template pTemplate="header">
+          <div class="flex flex-column md:flex-row md:justify-content-between">
+            <div>
+              <span>
+                <b>
+                  <p-dropdown [options]="viewSortAnzahl" placeholder="?" [(ngModel)]="viewSortAnzahlSelected" (onChange)="onAnzahlChange($event)" styleClass="mb-2 md:mb-0"></p-dropdown>
+                </b>
+                Spieler
+              </span>
+              <span> - </span>
+              <span>
+                <b>{{ viewSpiele.length }}</b>
+                Spiele
+              </span>
+            </div>
+            <div>
+              <!-- <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By Price" (onChange)="console($event)"
+                      styleClass="mb-2 md:mb-0"></p-dropdown> -->
+              <p-dropdown
+                [required]="true"
+                [options]="viewSortOptions"
+                placeholder="Sort"
+                [(ngModel)]="viewSortOptionSelected"
+                (onChange)="onSortChange($event)"
+                styleClass="mb-2 md:mb-0"
+              ></p-dropdown>
+            </div>
+
+            <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+          </div>
+        </ng-template>
+
+        <ng-template let-spiel pTemplate="listItem">
+          <div class="col-12" [@fadeInGrowStagger]="spiel">
+            <div class="border-1 border-round surface-border m-1 p-1">
+              <div class="flex">
+                <div *ngFor="let plattform of spiel.spiel.plattforms.entrys">
+                  <img
+                    class="antiselect border-bottom-1 border-round surface-border"
+                    style="height: 100%"
+                    loading="lazy"
+                    [src]="'https://cdn.akamai.steamstatic.com/steam/apps/' + plattform.value + '/header.jpg'"
+                    [alt]="plattform.value"
+                    onerror="this.onerror=null; this.remove();"
+                    title="{{ spiel.spiel.name }}"
+                  />
+                </div>
+                <span class="p-1 nowrap-text">
+                  {{ spiel.spiel.name }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+
+        <ng-template let-entry pTemplate="gridItem">
+          <div class="col-12 sm:col-6 md:col-4 lg:col-4 xl:col-3 xxl:col-3">
+            <div class="game border-1 border-round surface-border m-1 cursor-pointer" tabindex="0">
+              <div *ngFor="let plattform of entry.spiel.plattforms.entrys">
+                <img
+                  class="antiselect border-bottom-1 border-round surface-border"
+                  style="width: 100%"
+                  loading="lazy"
+                  [src]="'https://cdn.akamai.steamstatic.com/steam/apps/' + plattform.value + '/header.jpg'"
+                  [alt]="plattform.value"
+                  onerror="this.onerror=null; this.remove();"
+                  title="{{ entry.spiel.name }}"
+                />
+              </div>
+
+              <!-- <div class="flex" style="position: absolute; transform: translateY(-13px); z-index: +1; margin-left: 0.25rem;">
+                <span class="mr-1 px-1 border-round" style="background-color: #000 ;" *ngFor="let spieler of getListFromMap(entry.spieler, 'yes')">
+                  <span>
+                    {{spieler}}
+                  </span>
+                </span>
+              </div> -->
+
+              <div class="p-1 nowrap-text">
+                {{ entry.spiel.name }}
+              </div>
+
+              <div class="flex p-1">
+                +
+                <span class="mr-1 px-1 border-round" style="background-color: #000" *ngFor="let spieler of getListFromMap(entry.spieler, 'yes')">
+                  <span>
+                    {{ spieler }}
+                  </span>
+                </span>
+              </div>
+              <div *ngIf="viewSortAnzahlSelected != viewSortAnzahlMax" class="flex p-1">
+                -
+                <span class="mr-1 px-1 border-round" style="background-color: #000" *ngFor="let spieler of getListFromMap(entry.spieler, 'no')">
+                  <span>
+                    {{ spieler }}
+                  </span>
+                </span>
+              </div>
+
+              <!-- <div class="p-1 gameinfo">
+                <span *ngIf="spiel.spiel.minPlayers != 0 && spiel.spiel.maxPlayers != 0">Spieler: {{ spiel.spiel.minPlayers }}
+                  - {{ spiel.spiel.maxPlayers }}</span>
+                <ul class="m-0 border-1 surface-border">
+                  <li *ngFor="let plattform of spiel.plattforms" class="plattform">{{plattform.name}}</li>
+                </ul>
+              </div> -->
+            </div>
+          </div>
+        </ng-template>
+
+        <!-- <ng-template pTemplate="footer">Choose from the list.</ng-template> -->
+
+        <!-- <ng-template pTemplate="paginatorleft" let-state> -->
+        <!-- <span>{{viewSpiele.length}} Spiele</span> -->
+        <!-- {{state.first}}
+          <button type="button" pButton icon="pi-refresh"></button> -->
+        <!-- </ng-template> -->
+
+        <!-- <ng-template pTemplate="paginatorright">
+          <button type="button" pButton icon="pi-cloud-upload"></button>
+        </ng-template> -->
+
+        <!-- <ng-template let-item pTemplate="paginatordropdownitem">
+          {{item.value}} - per page
+        </ng-template> -->
+
+        <ng-template pTemplate="empty">
+          <div class="flex flex-column align-items-center">
+            <h3 class="mb-4">Ihr habt keine Spiele, die ihr zusammen spielen könnt</h3>
+            <img style="width: 40%" class="border-round" src="https://i.ytimg.com/vi/gT4RDSGqdYU/maxresdefault.jpg" alt="GO TOUCH GRASS" />
+          </div>
+        </ng-template>
+      </p-dataView>
+    </div>
+  </main>
+
+  <div style="margin-block: 100vh"></div>
+
+  <div *ngIf="spieleWithCount.size > 0" style="background-color: #550" class="mb-5">
+    <ul *ngFor="let spieleliste of spieleWithCount | keyvalue">
+      <li>
+        <span>Spieleranzahl: {{ spieleliste.key }}</span>
+        <ul *ngFor="let spiel of spieleliste.value">
+          <li>{{ spiel.spiel.name }}</li>
+          <ul *ngFor="let spieler of getListFromMap(spiel.spieler, 'yes')">
+            <li>+ {{ spieler }}</li>
+          </ul>
+          <ul *ngFor="let spieler of getListFromMap(spiel.spieler, 'no')">
+            <li>- {{ spieler }}</li>
+          </ul>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <!-- <ul *ngFor="let spieleliste of spieleWithCount | keyvalue">
+    <ul *ngFor="let spiel of spieleliste.value">
+      <li>{{spiel.spiel.name}}</li>
+      <sgc-game-capsule [game]="spiel.spiel" class="relative p-0 col-12 sm:col-6 md:col-4 lg:col-4 xl:col-3 xxl:col-3">
+      </sgc-game-capsule>
+    </ul>
+  </ul> -->
+
+  <!-- <div *ngIf="spieleWithCount.size > 0" style="background-color: #220" class="mb-5">
+    <ul *ngFor="let spieleliste of spieleWithCount | keyvalue">
+      <li>
+        <span>Spieleranzahl: {{spieleliste.key}}</span>
+        <ul *ngFor="let spielId of spieleliste.value">
+          <li>
+            <div class="text-800">{{spielId}}</div>
+            <ul *ngIf="getSpielWithId(spielId); let spielObj">
+              <li>{{spielObj.name}}</li> -->
+  <!-- <ng-template *ngIf="getSpielerAccountsWithSpielId(spielId); let alleSpieler">
+                <li>{{alleSpieler}}</li>
+              </ng-template> -->
+  <!--
+            </ul>
+            <ul *ngIf="getSpielerAccountsWithSpielId(spielId); let spieler">
+              <div class="text-800" (click)="getSpielerAccountsWithSpielId(spielId)">Spieler</div>
+              <li>{{spieler}}</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div> -->
+
+  <hr />
+
+  <div *ngIf="spiele.length > 0" style="background-color: #990000" class="mb-5">
+    <h3>Spiele</h3>
+    <div *ngFor="let spiel of spiele; trackByProperty: 'name'">
+      {{ spiel.name }}
+    </div>
+    <!-- <hr />
+    <div>
+      {{ spiele | json }}
+    </div> -->
+  </div>
+
+  <div *ngIf="genres.length > 0" style="background-color: #009900" class="mb-5">
+    <h3>Genres</h3>
+    <div *ngFor="let genre of genres; trackByProperty: 'name'">
+      {{ genre.name }}
+    </div>
+    <!-- <hr />
+    <div>
+      {{ genres | json }}
+    </div> -->
+  </div>
+
+  <div *ngIf="plattforms.length > 0" style="background-color: #000099" class="mb-5">
+    <h3>Plattformen</h3>
+    <div *ngFor="let plattform of plattforms; trackByProperty: 'name'">
+      {{ plattform.name }}
+    </div>
+    <!-- <hr />
+    <div>
+      {{ plattforms | json }}
+    </div> -->
+  </div>
+
+  <div *ngIf="spielerAccounts.length > 0" style="background-color: #990099" class="mb-5">
+    <h3>SpielerAccounts</h3>
+    <div *ngFor="let spielerAccount of spielerAccounts; trackByProperty: 'spiele'">
+      <span>{{ spielerAccount.player_id }}</span>
+      <div class="ml-2" *ngFor="let spiele of spielerAccount.spiele.entrys; trackByProperty: 'id'">
+        <!-- {{ getSpielWithId(spiele.id).name }} -->
+        {{ getSpielWithId(spiele.id).name }}
+      </div>
+    </div>
+    <hr />
+    <div>
+      {{ spielerAccounts | json }}
+    </div>
+  </div>
+
+  <div *ngIf="cyvedAccounts.length > 0" style="background-color: #540099" class="mb-5">
+    <h3>Cyved Accounts</h3>
+    <div *ngFor="let account of cyvedAccounts; trackByProperty: 'name'">{{ account.anmeldename }} -> {{ account.vorname }} {{ account.nachname }}</div>
+    <hr />
+    <div>
+      {{ cyvedAccounts | json }}
+    </div>
+  </div>
+</div>

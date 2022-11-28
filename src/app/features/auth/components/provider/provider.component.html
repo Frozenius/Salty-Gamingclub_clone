@@ -1,0 +1,29 @@
+<div class="grid justify-content-center align-content-center min-h-full">
+  <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
+    <div class="text-center mb-5">
+      <div class="text-900 text-3xl font-medium mb-3">Wähle einen Provider</div>
+      <span class="text-600 font-medium line-height-3">Diese Option kann von Browser Extensions oder den Cookie einstellungen blockiert sein!</span>
+    </div>
+    <button pButton pRipple label="Sign in with Github" icon="pi pi-github" class="w-full" (click)="signInWithGithub()"></button>
+    <div class="flex align-items-center justify-content-center mt-4 mb-2">
+      <div class="flex align-items-center">
+        <div class="text-900 font-medium">
+          Mit dieser Methode akzeptierst du die
+          <a class="no-underline text-blue-500 cursor-pointer" (click)="privacy = true">Datenschutzerklärung</a>
+          und das
+          <a class="no-underline text-blue-500 cursor-pointer" (click)="nutzung = true">Regelwerk</a>.
+        </div>
+      </div>
+    </div>
+    <p-divider align="center" type="dashed">
+      <b>oder</b>
+    </p-divider>
+    <button pButton pRipple label="Registrieren" class="w-full" routerLink="/auth/register"></button>
+  </div>
+</div>
+<p-dialog header="Datenschutzerklärung" [(visible)]="privacy" [style]="{ width: '90vw' }">
+  <sgc-privacy></sgc-privacy>
+</p-dialog>
+<p-dialog header="Regelwerk" [(visible)]="nutzung" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }" [style]="{ width: '50vw' }">
+  <sgc-terms></sgc-terms>
+</p-dialog>

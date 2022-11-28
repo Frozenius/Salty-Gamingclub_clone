@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  salty-gamingclub-web:
+    build:
+      context: .
+    ports:
+      - "80:80"
+      - "443:443"
+    container_name: salty-gamingclub/web
+    restart: unless-stopped
+

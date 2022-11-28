@@ -1,0 +1,77 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <h5>Current Events</h5>
+      <button pButton type="button" (click)="addDialog = !addDialog" icon="pi pi-plus" label="Add Event"
+              class="p-button-success mb-2"></button>
+      <p-dialog [(visible)]="addDialog" [style]="{width: '450px', display: 'inline-block'}" header="Add Event"
+                [modal]="true"
+                [closable]="true">
+        <ng-template pTemplate="content">
+          <div class="p-fluid grid formgrid">
+            <div class="field col-12">
+              <label for="title">Title</label>
+              <input id="title" type="text" pInputText [(ngModel)]="title"
+                     [required]="true">
+            </div>
+            <div class="field col-12">
+              <h6>Ganztag Event</h6>
+              <p-toggleButton [(ngModel)]="checked1" onIcon="pi pi-check" offIcon="pi pi-times"></p-toggleButton>
+
+            </div>
+            <div class="field col-12" *ngIf="checked1">
+              <label for="range">Range</label>
+              <p-calendar [(ngModel)]="rangeDates" selectionMode="range" [readonlyInput]="true"
+                          inputId="range" appendTo="body"></p-calendar>
+            </div>
+            <div class="field col-12 " *ngIf="!checked1">
+              <label for="time">Start</label>
+              <p-calendar [(ngModel)]="startDate" [showTime]="true" [showSeconds]="true" inputId="time"
+                          appendTo="body"></p-calendar>
+            </div>
+            <div class="field col-12" *ngIf="!checked1">
+              <label for="time">Ende</label>
+              <p-calendar [(ngModel)]="endDate" [showTime]="true" [showSeconds]="true" inputId="time"
+                          appendTo="body"></p-calendar>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <button pButton label="Save" icon="pi pi-check" class="p-button-text" (click)="add()"></button>
+        </ng-template>
+      </p-dialog>
+      <full-calendar [options]="options"></full-calendar>
+      <p-dialog [(visible)]="eventDialog" [style]="{width: '450px'}" header="Event Details" [modal]="true"
+                [closable]="true">
+        <ng-template pTemplate="content">
+          <div class="p-fluid">
+            <div class="field">
+              <label for="title">Title</label>
+              <input id="title" type="text" pInputText *ngIf="clickedEvent" [(ngModel)]="changedEvent.title"
+                     [required]="true">
+            </div>
+            <div class="field">
+              <label for="start">Start</label>
+              <p-calendar id="start" *ngIf="clickedEvent" [(ngModel)]="changedEvent.start" [showTime]="true"
+                          appendTo="body"></p-calendar>
+            </div>
+            <div class="field">
+              <label for="end">End</label>
+              <p-calendar id="end" *ngIf="clickedEvent" [(ngModel)]="changedEvent.end" [showTime]="true"
+                          appendTo="body"></p-calendar>
+            </div>
+            <div class="p-field-checkbox">
+              <p-checkbox id="allday" *ngIf="clickedEvent" [(ngModel)]="changedEvent.allday"></p-checkbox>
+              <label for="allday">All Day</label>
+            </div>
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="footer">
+          <button pButton label="Save" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
+          <button pButton label="Reset" icon="pi pi-refresh" class="p-button-text" (click)="reset()"></button>
+        </ng-template>
+      </p-dialog>
+    </div>
+  </div>
+</div>

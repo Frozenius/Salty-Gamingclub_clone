@@ -1,0 +1,20 @@
+<div class="layout-footer">
+  <div class="footer-logo-container">
+    <img id="footer-logo" src="assets/images/icons/Salty.png" alt="atlantis-layout" />
+    <span class="app-name">Salty-GamingClub</span>
+  </div>
+  <a pRipple class="cursor-pointer block text-700 py-2 px-3 transition-colors transition-duration-150 hover:surface-300 border-round hover:text-900" (click)="nutzung = true">REGELWERK</a>
+  <a pRipple class="cursor-pointer block text-700 py-2 px-3 transition-colors transition-duration-150 hover:surface-300 border-round hover:text-900" (click)="impressum = true">IMPRESSUM</a>
+  <a pRipple class="cursor-pointer block text-700 py-2 px-3 transition-colors transition-duration-150 hover:surface-300 border-round hover:text-900" (click)="privacy = true">DATENSCHUTZ</a>
+
+  <span class="copyright">&#169; Salty-Gamingclub - {{ getCurrentYear() }}</span>
+</div>
+<p-dialog header="Datenschutzerklärung" [(visible)]="privacy" [style]="{ width: '90vw' }">
+  <sgc-privacy></sgc-privacy>
+</p-dialog>
+<p-dialog header="Impressum" [(visible)]="impressum" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }" [style]="{ width: '50vw' }">
+  <sgc-impressum></sgc-impressum>
+</p-dialog>
+<p-dialog header="Regelwerk" [(visible)]="nutzung" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }" [style]="{ width: '50vw' }">
+  <sgc-terms></sgc-terms>
+</p-dialog>

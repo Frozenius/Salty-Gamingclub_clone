@@ -1,0 +1,122 @@
+<div class="login-body">
+  <div class="login-image">
+    <img [src]="'assets/layout/images/pages/login-' + (app.colorScheme === 'dark' ? 'ondark' : 'onlight') + '.png'" alt="atlantis" />
+  </div>
+  <div class="login-panel p-fluid">
+    <div class="flex flex-column">
+      <div class="mb-5 text-left">
+        <div class="text-900 text-3xl font-medium mb-3">Willkommen!</div>
+      </div>
+      <form [formGroup]="register" (ngSubmit)="onSubmit()" novalidate>
+        <!-- USERNAME -->
+        <div *ngIf="submitted && f['username'].errors" class="text-left">
+          <small *ngIf="f['username'].errors['required']" id="name1-help" class="p-error">Du brauchst einen Nutzernamen</small>
+          <small *ngIf="f['username'].errors['minlength']" id="name1-help" class="p-error">Der sollte schon mehr als 3 Zeichen haben</small>
+          <small *ngIf="f['username'].errors['maxlength']" id="name1-help" class="p-error">Bitte nur maximal 20 Zeichen</small>
+        </div>
+        <div class="form-container">
+          <span class="p-input-icon-left">
+            <i class="pi pi-user"></i>
+            <input id="name1" placeholder="Username" type="text" pInputText class="w-full mb-3" aria-describedby="name1-help" formControlName="username" />
+          </span>
+
+          <!-- VORNAME -->
+          <div *ngIf="submitted && f['vorname'].errors" class="text-left">
+            <small *ngIf="f['vorname'].errors['required']" id="vorname-help" class="p-error"> Bitte gib deinen Vornamen an </small>
+          </div>
+          <span class="p-input-icon-left">
+            <i class="pi pi-user"></i>
+            <input id="vorname" type="text" placeholder="Vorname (optional)" pInputText class="w-full mb-3" aria-describedby="vorname-help" formControlName="vorname" />
+          </span>
+
+          <!-- NACHNAME -->
+          <div *ngIf="submitted && f['nachname'].errors" class="text-left">
+            <small *ngIf="f['nachname'].errors['required']" id="nachname-help" class="p-error"> Bitte gib deinen Nachnamen an </small>
+          </div>
+          <span class="p-input-icon-left">
+            <i class="pi pi-user"></i>
+            <input id="nachname" placeholder="Nachname (optional)" type="text" pInputText class="w-full mb-3" aria-describedby="nachname-help" formControlName="nachname" />
+          </span>
+
+          <!-- EMAIL -->
+          <div *ngIf="submitted && f['email'].errors" class="text-left">
+            <small *ngIf="f['email'].errors['required']" id="email-help" class="p-error"> Bitte gib deine Email-Adresse an </small>
+            <small *ngIf="f['email'].errors['email']" id="email-help" class="p-error"> Bitte gib eine gültige Email-Adresse an </small>
+          </div>
+          <span class="p-input-icon-left">
+            <i class="pi pi-at"></i>
+            <input id="email" type="email" placeholder="Email" pInputText class="w-full mb-3" aria-describedby="email-help" formControlName="email" />
+          </span>
+
+          <!-- PASSWORT -->
+          <div *ngIf="submitted && f['password'].errors" class="text-left">
+            <small *ngIf="f['password'].errors['required']" id="password-help" class="p-error">Bitte gib ein Passwort an</small>
+            <small *ngIf="f['password'].errors['minlength']" id="password-help" class="p-error">Das Passwort sollte mindestens 8 Zeichen lang sein</small>
+            <small *ngIf="f['password'].errors['maxlength']" id="password-help" class="p-error">Das Passwort sollte maximal 40 Zeichen lang sein</small>
+          </div>
+          <span class="p-input-icon-left">
+            <i class="pi pi-key"></i>
+            <input pPassword type="password" placeholder="Passwort" class="w-full mb-3" [feedback]="false" aria-describedby="password-help" formControlName="password" />
+          </span>
+
+          <!-- PASSWORT ERNEUT -->
+          <div *ngIf="submitted && f['password2'].errors" class="text-left">
+            <small *ngIf="f['password2'].errors['required']" id="password2-help" class="p-error"> Bitte gib dein Passwort nochmal an </small>
+            <small *ngIf="f['password2'].errors['matching']" id="password2-help" class="p-error"> Die Passwörter stimmen nicht überein </small>
+          </div>
+          <span class="p-input-icon-left">
+            <i class="pi pi-key"></i>
+            <input
+              pPassword
+              id="password2"
+              [feedback]="false"
+              type="password"
+              placeholder="Passwort wiederholen"
+              pInputText
+              class="w-full mb-3"
+              formControlName="password2"
+              aria-describedby="password2-help"
+            />
+          </span>
+
+          <div class="flex flex-column align-items-start justify-content-between mt-4 mb-2">
+            <small *ngIf="submitted && f['acceptPrivacy'].errors" id="acceptPrivacy-help" class="p-error text-left"> Bitte akzeptiere die Datenschutzerklärung und das Regelwerk </small>
+            <div class="flex align-items-center">
+              <p-checkbox id="acceptPrivacy" [binary]="true" styleClass="mr-2" formControlName="acceptPrivacy" aria-describedby="acceptPrivacy-help"></p-checkbox>
+              <label for="acceptPrivacy" class="text-900 font-medium"
+                >Ich akzeptiere die
+                <a class="no-underline text-blue-500 cursor-pointer" (click)="privacy = true">Datenschutzerklärung</a>
+                und das
+                <a class="no-underline text-blue-500 cursor-pointer" (click)="nutzung = true">Regelwerk</a>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="button-container">
+          <button pButton pRipple label="Registrieren & Anmelden" icon="pi pi-sign-up"></button>
+          <span>Schon registriert?<a [routerLink]="['../login']">Log dich ein!</a></span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="grid justify-content-center align-content-center min-h-full">
+  <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
+    <div class="text-center mb-5">
+      <div class="text-900 text-3xl font-medium mb-3">Willkommen!</div>
+      <span class="text-600 font-medium line-height-3">Schon angemeldet?</span>
+    </div>
+
+    <form [formGroup]="register" (ngSubmit)="onSubmit()" novalidate>
+      <div class="p-inputgroup">
+        <!-- Passwort -->
+        <label for="password1" class="block text-900 font-medium mb-2">Passwort</label>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon mb-3"></span>
+        </div>
+        <label for="password2" class="block text-900 font-medium mb-2 mt-2">Passwort wiederholen</label>
+        <div class="p-inputgroup"></div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+// https://dev.to/afif/i-made-100-css-loaders-for-your-next-project-4eje
+.pulsing-1 {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #f00;
+  box-shadow: 0 0 0 0 #f004;
+  animation: pl1 1s infinite;
+}
+
+@keyframes pl1 {
+  100% {
+    box-shadow: 0 0 0 10px #0000
+  }
+}
+
+// https://codepen.io/t_afif/pen/bGqEBWv
+.pulsing-2 {
+  --r: 255;
+  --g: 0;
+  --b: 0;
+  --bg: rgb(var(--r, 0) var(--g, 0) var(--b, 0));
+  --pulse: rgb(var(--r, 0) var(--g, 0) var(--b, 0) / 0.267);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--bg);
+  box-shadow: 0 0 0 0 var(--pulse);
+  animation: pl2 1.5s infinite linear;
+  position: relative;
+}
+
+.pulsing-2:before,
+.pulsing-2:after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 var(--pulse);
+  animation: inherit;
+  animation-delay: -0.5s;
+}
+
+.pulsing-2:after {
+  animation-delay: -1s;
+}
+
+@keyframes pl2 {
+  100% {
+    box-shadow: 0 0 0 40px #0000;
+  }
+}
+
+// #video {
+//   background-color: #000;
+// }
+
+.big {
+  width: 100%;
+  height: 100%;
+}

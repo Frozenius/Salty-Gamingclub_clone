@@ -1,0 +1,134 @@
+<div
+  id="appSidebar"
+  class="appSidebar surface-section h-screen hidden lg:block flex-shrink-0 relative lg:sticky left-0 top-0 z-1 border-right-1 surface-border border-gray-800 select-none"
+  style="width: 270px"
+>
+  <div class="flex flex-column h-full">
+    <div class="flex align-items-center px-5 flex-shrink-0" style="height: 60px">
+      <img src="../../../../assets/images/icons/Salty.png" alt="Image" height="40" />
+      <h3>Salty Gamingclub</h3>
+    </div>
+    <div class="overflow-y-auto">
+      <ul class="list-none p-3 m-0">
+        <li>
+          <span class="block p-3 text-600">BASIC ADMINISTRATION</span>
+        </li>
+        <li>
+          <a
+            pRipple
+            class="flex align-items-center text-900 cursor-pointer p-3 border-round hover:bg-gray-800 hover:text-white transition-duration-150 transition-colors no-underline"
+            routerLink="home"
+            routerLinkActive="text-blue-500"
+          >
+            <i class="pi pi-home mr-2"></i>
+            <span class="font-medium">Overview</span>
+          </a>
+        </li>
+        <li *ngIf="(user?.roles)!.admin">
+          <a
+            pRipple
+            class="flex align-items-center text-900 cursor-pointer p-3 border-round hover:bg-gray-800 hover:text-white transition-duration-150 transition-colors no-underline"
+            (click)="notImplemented()"
+          >
+            <i class="pi pi-cog mr-2"></i>
+            <span class="font-medium">Settings</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="list-none p-3 m-0">
+        <li>
+          <span class="block p-3 text-600">EXTRAS</span>
+        </li>
+        <li>
+          <a
+            pRipple
+            class="flex align-items-center text-900 cursor-pointer p-3 border-round hover:bg-gray-800 hover:text-white transition-duration-150 transition-colors no-underline"
+            routerLink="ark/shop"
+            routerLinkActive="text-blue-500"
+          >
+            <span class="mdi mdi-google-downasaur mr-2"></span>
+            <span class="font-medium">Ark Shop</span>
+          </a>
+        </li>
+        <li>
+          <a
+            pRipple
+            class="flex align-items-center text-900 cursor-pointer p-3 border-round hover:bg-gray-800 hover:text-white transition-duration-150 transition-colors no-underline"
+            routerLink="spielleiter"
+            routerLinkActive="text-blue-500"
+          >
+            <i class="mdi mdi-gamepad-variant mr-2"></i>
+            <span class="font-medium">Spielleiter</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="list-none p-3 m-0">
+        <li>
+          <span class="block p-3 text-600">MANAGEMENT</span>
+        </li>
+        <li>
+          <a
+            pRipple
+            class="flex align-items-center text-900 cursor-pointer p-3 border-round hover:bg-gray-800 hover:text-white transition-duration-150 transition-colors no-underline"
+            routerLink="server/locations"
+            routerLinkActive="text-blue-500"
+          >
+            <i class="pi pi-globe mr-2"></i>
+            <span class="font-medium">Locations</span>
+          </a>
+        </li>
+        <li>
+          <a
+            pRipple
+            class="flex align-items-center text-900 cursor-pointer p-3 border-round hover:bg-gray-800 hover:text-white transition-duration-150 transition-colors no-underline"
+            (click)="notImplemented()"
+          >
+            <i class="pi pi-server mr-2"></i>
+            <span class="font-medium">Servers</span>
+          </a>
+        </li>
+        <li *ngIf="(user?.roles)!.admin || (user?.roles)!.dev">
+          <a
+            pRipple
+            class="flex align-items-center text-900 cursor-pointer p-3 border-round hover:bg-gray-800 hover:text-white transition-duration-150 transition-colors no-underline"
+            routerLink="admin/users"
+            routerLinkActive="text-500"
+          >
+            <i class="pi pi-user mr-2"></i>
+            <span class="font-medium">Users</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="list-none p-3 m-0">
+        <li>
+          <span class="block p-3 text-600">SERVICE MANAGEMENT</span>
+        </li>
+        <li>
+          <a
+            pRipple
+            class="flex align-items-center text-900 cursor-pointer p-3 border-round hover:bg-gray-800 hover:text-white transition-duration-150 transition-colors no-underline"
+            routerLink="management/performance"
+            routerLinkActive="text-500"
+          >
+            <i class="pi pi-chart-bar mr-2"></i>
+            <span class="font-medium">Performance</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="mt-auto">
+      <hr class="mb-3 mx-3 border-top-1 border-none surface-border" />
+      <div class="flex align-items-center justify-content-evenly mb-3">
+        <div class="cursor-pointer" (click)="impressum = true">Impressum</div>
+        <div>•</div>
+        <div class="cursor-pointer" (click)="privacy = true">Datenschutz</div>
+      </div>
+    </div>
+  </div>
+</div>
+<p-dialog header="Datenschutzerklärung" [(visible)]="privacy" [style]="{ width: '90vw' }">
+  <sgc-privacy></sgc-privacy>
+</p-dialog>
+<p-dialog header="Impressum" [(visible)]="impressum" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }" [style]="{ width: '50vw' }">
+  <sgc-impressum></sgc-impressum>
+</p-dialog>

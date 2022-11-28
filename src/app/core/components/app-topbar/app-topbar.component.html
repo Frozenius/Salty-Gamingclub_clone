@@ -1,0 +1,63 @@
+<div class="layout-topbar">
+  <div class="layout-topbar-left">
+    <a href="#" class="topbar-menu-button" (click)="appMain.onMenuButtonClick($event)" *ngIf="appMain.isOverlay() || appMain.isMobile()">
+      <i class="pi pi-bars"></i>
+    </a>
+
+    <a routerLink="" class="logo">
+      <img src="assets/images/icons/Salty.png" />
+    </a>
+
+    <a routerLink="">
+      <span class="text-800 font-bold">Salty-Gamingclub</span>
+    </a>
+  </div>
+  <sgc-app-menu [user]="user"></sgc-app-menu>
+  <div class="layout-topbar-right">
+    <ul class="layout-topbar-right-items">
+      <li
+        #profile
+        class="profile-item"
+        [ngClass]="{
+          'active-topmenuitem': appMain.activeTopbarItem === profile
+        }"
+      >
+        <a href="" (click)="appMain.onTopbarItemClick($event, profile)">
+          <img [src]="user?.avatar_url ? user?.avatar_url : 'assets/images/icons/user.png'" />
+        </a>
+        <ul class="fadeInDown">
+          <li class="fadeInDown">
+            <a routerLink="private/profile" (click)="appMain.onTopbarSubItemClick($event)" *ngIf="user">
+              <i class="pi pi-user pi-fw"></i>
+              <span>Profile</span>
+            </a>
+          </li>
+          <li class="fadeInDown">
+            <a href="" *ngIf="app.colorScheme === 'dark'; else light" (click)="appMain.changeColorScheme($event, 'light')">
+              <i class="pi pi-sun pi-fw"></i>
+              <span>Lightmode</span>
+            </a>
+            <ng-template #light>
+              <a href="" (click)="appMain.changeColorScheme($event, 'dark')">
+                <i class="pi pi-moon pi-fw"></i>
+                <span>Darkmode</span>
+              </a>
+            </ng-template>
+          </li>
+          <li class="menuitem">
+            <a href="" (click)="logout($event)" *ngIf="user; else login">
+              <i class="pi pi-power-off pi-fw"></i>
+              <span>Logout</span>
+            </a>
+            <ng-template #login>
+              <a routerLink="auth/login">
+                <i class="pi pi-sign-in pi-fw"></i>
+                <span>Login</span>
+              </a>
+            </ng-template>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>

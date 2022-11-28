@@ -1,0 +1,174 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+          <div class="my-2">
+            <!--            <button pButton pRipple label='New' icon='pi pi-plus' class='p-button-success mr-2'></button>-->
+            <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" [disabled]="!selectedUsers || !selectedUsers.length"></button>
+          </div>
+        </ng-template>
+      </p-toolbar>
+      <p-table
+        #ut
+        [value]="accounts"
+        [columns]="cols"
+        responsiveLayout="scroll"
+        [rows]="10"
+        [globalFilterFields]="['username', 'vorname', 'nachname', 'email']"
+        [paginator]="true"
+        [rowsPerPageOptions]="[10, 20, 30]"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Zeige {first} bis {last} von {totalRecords} Benutzern"
+        [(selection)]="selectedUsers"
+        selectionMode="multiple"
+        [rowHover]="true"
+        dataKey="id"
+        (sortFunction)="customSort($event)"
+        [customSort]="true"
+        [totalRecords]="totalAccounts"
+      >
+        <ng-template pTemplate="caption">
+          <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+            <h5 class="m-0">Manage Products</h5>
+            <span class="block mt-2 md:mt-0 p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" (input)="ut.filterGlobal($event.target!['value'], 'contains')" placeholder="Search..." />
+            </span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 3rem">
+              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th></th>
+            <th pSortableColumn="username">
+              Username
+              <p-sortIcon field="username"></p-sortIcon>
+            </th>
+            <th pSortableColumn="vorname">
+              Vorname
+              <p-sortIcon field="vorname"></p-sortIcon>
+            </th>
+            <th pSortableColumn="nachname">
+              Nachname
+              <p-sortIcon field="nachname"></p-sortIcon>
+            </th>
+            <th pSortableColumn="email">
+              Email
+              <p-sortIcon field="email"></p-sortIcon>
+            </th>
+            <th>Rollen</th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-account>
+          <tr>
+            <td>
+              <p-tableCheckbox [value]="account"></p-tableCheckbox>
+            </td>
+            <td>
+              <img
+                [src]="account.avatar_url ? account.avatar_url : 'assets/images/icons/user.png'"
+                class="border-round antiselect"
+                [ngClass]="account.avatar_url ? 'profile-image-background' : ''"
+                style="width: 45px; height: 45px"
+                alt="Avatar"
+              />
+            </td>
+            <td>{{ account.username }}</td>
+            <td class="antiselect">{{ account.vorname }}</td>
+            <td class="antiselect">{{ account.nachname }}</td>
+            <td class="antiselect">{{ account.email }}</td>
+            <td>
+              <div class="flex">
+                <button
+                  pButton
+                  pRipple
+                  class="p-button-success p-button-rounded mr-2"
+                  (click)="confirm($event, 'user', account)"
+                  label="User"
+                  [ngStyle]="{ opacity: account.roles.user ? 1 : 0.5 }"
+                ></button>
+                <button pButton pRipple class="p-button-info p-button-rounded mr-2" (click)="confirm($event, 'dev', account)" label="Dev" [ngStyle]="{ opacity: account.roles.dev ? 1 : 0.5 }"></button>
+                <button
+                  pButton
+                  pRipple
+                  class="p-button-danger p-button-rounded"
+                  (click)="confirm($event, 'admin', account)"
+                  label="Admin"
+                  [ngStyle]="{
+                    opacity: account.roles.admin ? 1 : 0.5
+                  }"
+                ></button>
+              </div>
+            </td>
+            <td>
+              <div *ngIf="user?.roles?.admin">
+                <button *ngIf="!account.locked?.locked; else unlock" pButton pRipple class="p-button-danger p-button-plain mr-1" (click)="lock($event, account)" label="Sperren"></button>
+                <ng-template #unlock>
+                  <button pButton pRipple class="p-button-outlined p-button-warning p-button-plain mr-1" (click)="unLock($event, account)" label="Entsperren"></button>
+                </ng-template>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+<p-dialog [(visible)]="deleteUserDialog" header="Confirm" [modal]="true" [style]="{ width: '450px' }">
+  <div class="flex align-items-center justify-content-center">
+    <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+    <span *ngIf="account"
+      >Are you sure you want to delete <b>{{ account.username }}</b
+      >?</span
+    >
+  </div>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteUserDialog = false"></button>
+    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDelete()"></button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="deleteUserDialog" header="Confirm" [modal]="true" [style]="{ width: '450px' }">
+  <div class="flex align-items-center justify-content-center">
+    <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+    <span *ngIf="account"
+      >Are you sure you want to delete <b>{{ account.username }}</b
+      >?</span
+    >
+  </div>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteUserDialog = false"></button>
+    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDelete()"></button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="deleteUserDialog" header="Confirm" [modal]="true" [style]="{ width: '450px' }">
+  <div class="flex align-items-center justify-content-center">
+    <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+    <span *ngIf="account"
+      >Are you sure you want to delete <b>{{ account.username }}</b
+      >?</span
+    >
+  </div>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteUserDialog = false"></button>
+    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDelete()"></button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="switchRoleDialog" header="Confirm" [modal]="true" [style]="{ width: '450px' }">
+  <div class="flex align-items-center justify-content-center">
+    <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+    <span *ngIf="account"
+      >Willst du die Rolle <b>{{ switchingRole }}</b> für <b>{{ account.username }}</b> wirklich ändern?</span
+    >
+  </div>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="switchRoleDialog = false"></button>
+    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="switchRole(account, switchingRole)"></button>
+  </ng-template>
+</p-dialog>

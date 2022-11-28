@@ -1,0 +1,12 @@
+<div *ngIf="accountData" class="col-12">
+  <div class="card">
+    <h5>Profile</h5>
+    <div class="p-fluid p-formgrid grid">
+      <div class="field col-12 md:col-6">
+        <label for="firstName">Vorname</label>
+        <input pInputText id="firstName" type="text" [placeholder]="accountData.user.vorname" />
+      </div>
+    </div>
+  </div>
+</div>
+<button (click)="login()">Login</button>

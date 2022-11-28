@@ -1,0 +1,481 @@
+<div class="surface-overlay shadow-2 flex relative lg:static justify-content-between" style="min-height: 42px">
+  <div class="flex align-items-center px-5 my-auto flex-shrink-0 cursor-pointer hover:surface-50 border-round" style="height: 40px" routerLink="/home">
+    <img src="assets/images/icons/Salty.png" alt="Image" height="30" />
+    <h3>Salty-Gamingclub</h3>
+  </div>
+  <a pRipple class="cursor-pointer inline-flex align-items-center px-3 lg:hidden text-700" pStyleClass="@next" enterClass="hidden" leaveToClass="hidden" [hideOnOutsideClick]="true">
+    <i class="pi pi-bars text-2xl"></i>
+  </a>
+  <div class="hidden lg:flex absolute lg:static w-full surface-overlay left-0 top-100 z-1 shadow-2 lg:shadow-none">
+    <ul class="flex list-none p-0 m-0 flex-column lg:flex-row">
+      <li class="h-full">
+        <a
+          pRipple
+          class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 lg:border-left-none lg:border-bottom-2 border-blue-500 transition-colors transition-duration-150 py-3 lg:py-0 px-3"
+        >
+          <span class="pi pi-home mr-2"></span>
+          <span class="font-medium">Home</span>
+        </a>
+      </li>
+      <li class="h-full">
+        <a
+          pRipple
+          class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 lg:border-left-none lg:border-bottom-2 border-transparent hover:border-500 transition-colors transition-duration-150 py-3 lg:py-0 px-3"
+          pStyleClass="@next"
+          enterClass="hidden"
+          enterActiveClass="scalein"
+          leaveToClass="hidden"
+          leaveActiveClass="fadeout"
+          [hideOnOutsideClick]="true"
+        >
+          <span class="pi pi-users mr-2"></span>
+          <span class="font-medium">Administration</span>
+          <i class="pi pi-angle-down ml-auto xl:ml-3"></i>
+        </a>
+        <div class="hidden static lg:absolute w-full surface-overlay left-0 top-100 z-1 shadow-none lg:shadow-2 origin-top border-round pl-3 lg:pl-0">
+          <ul class="list-none p-0 m-0">
+            <li>
+              <a pRipple class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 border-transparent hover:border-500 transition-colors transition-duration-150 p-3">
+                <i class="pi pi-user mr-2"></i>
+                <span class="font-medium">Users</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="h-full">
+        <a
+          pRipple
+          class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 lg:border-left-none lg:border-bottom-2 border-transparent hover:border-500 transition-colors transition-duration-150 py-3 lg:py-0 px-3"
+        >
+          <span class="pi pi-calendar mr-2"></span>
+          <span class="font-medium">Calendar</span>
+        </a>
+      </li>
+      <li class="h-full">
+        <a
+          pRipple
+          class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 lg:border-left-none lg:border-bottom-2 border-transparent hover:border-500 transition-colors transition-duration-150 py-3 lg:py-0 px-3"
+        >
+          <span class="pi pi-home mr-2"></span>
+          <span class="font-medium">Stats</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <a pRipple class="cursor-pointer inline-flex align-items-center px-3 lg:hidden text-700" pStyleClass="@next" enterClass="hidden" leaveToClass="hidden" [hideOnOutsideClick]="true">
+    <i class="pi pi-ellipsis-v text-xl"></i>
+  </a>
+  <div class="hidden lg:flex lg:justify-content-end absolute lg:static w-full surface-overlay left-0 top-100 z-1 shadow-2 lg:shadow-none">
+    <ul class="flex list-none p-0 m-0 flex-column lg:flex-row">
+      <li class="h-full">
+        <a
+          pRipple
+          class="cursor-pointer h-full inline-flex align-items-center text-600 py-3 lg:py-0 px-3 border-left-2 lg:border-left-none lg:border-bottom-2 border-transparent hover:border-500 transition-colors transition-duration-150"
+        >
+          <span class="pi pi-book mr-2 lg:mr-0"></span>
+          <span class="font-medium inline lg:hidden">Documentation</span>
+        </a>
+      </li>
+      <li class="h-full">
+        <a
+          pRipple
+          class="cursor-pointer h-full inline-flex align-items-center text-600 py-3 lg:py-0 px-3 border-left-2 lg:border-left-none lg:border-bottom-2 border-transparent hover:border-500 transition-colors transition-duration-150"
+        >
+          <span class="pi pi-inbox mr-2 lg:mr-0"></span>
+          <span class="font-medium inline lg:hidden">Inbox</span>
+        </a>
+      </li>
+      <li class="h-full">
+        <a
+          pRipple
+          class="cursor-pointer h-full inline-flex align-items-center text-600 py-3 lg:py-0 px-3 border-left-2 lg:border-left-none lg:border-bottom-2 border-transparent hover:border-500 transition-colors transition-duration-150"
+        >
+          <span class="pi pi-bell mr-2 lg:mr-0"></span>
+          <span class="font-medium inline lg:hidden">Notifications</span>
+        </a>
+      </li>
+      <li class="h-full relative">
+        <a
+          pRipple
+          class="cursor-pointer h-full inline-flex align-items-center text-600 py-3 lg:py-0 px-3 border-left-2 lg:border-left-none lg:border-bottom-2 border-transparent hover:border-500 transition-colors transition-duration-150"
+          pStyleClass="@next"
+          enterClass="hidden"
+          enterActiveClass="scalein"
+          leaveToClass="hidden"
+          leaveActiveClass="fadeout"
+          [hideOnOutsideClick]="true"
+        >
+          <img
+            [src]="user?.avatar_url ? user?.avatar_url : 'assets/images/icons/user.png'"
+            class="lg:mr-0"
+            style="width: 28px; height: 28px"
+            [ngClass]="user?.avatar_url ? 'profile-image-background' : ''"
+          />
+          <span class="mx-2 font-medium text-900">{{ user ? user.username : 'Account' }}</span>
+          <i class="pi pi-angle-down"></i>
+        </a>
+        <div class="hidden static lg:absolute w-full surface-overlay left-0 top-100 z-1 shadow-none lg:shadow-2 origin-top border-round pl-3 lg:pl-0">
+          <ul class="list-none p-0 m-0">
+            <li>
+              <a
+                pRipple
+                class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 border-transparent hover:border-500 transition-colors transition-duration-150 p-3"
+                *ngIf="user"
+              >
+                <span class="pi pi-user mr-2"></span>
+                <span class="font-medium">Profile</span>
+              </a>
+            </li>
+            <li>
+              <a
+                pRipple
+                class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 border-transparent hover:border-500 transition-colors transition-duration-150 p-3"
+                (click)="toggleColor(dark ? 'light' : 'dark')"
+              >
+                <span class="pi pi-cog mr-2"></span>
+                <span class="font-medium">{{ dark ? 'Light' : 'Dark' }}mode</span>
+              </a>
+            </li>
+            <li>
+              <a
+                pRipple
+                class="cursor-pointer h-full inline-flex align-items-center text-600 border-left-2 border-transparent hover:border-500 transition-colors transition-duration-150 p-3"
+                (click)="logout()"
+              >
+                <span class="pi pi-sign-out mr-2"></span>
+                <span class="font-medium">Sign Out</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="surface-overlay flex justify-content-between align-items-center px-5 border-bottom-1 surface-border relative top-0 left-0 w-full z-2 lg:hidden" style="height: 60px">
+  <div class="flex align-items-center px-5 my-auto flex-shrink-0 cursor-pointer hover:surface-50 border-round" style="height: 50px" routerLink="/home">
+    <img src="assets/images/icons/Salty.png" alt="Image" height="40" />
+    <h3>Salty-Gamingclub</h3>
+  </div>
+  <a pRipple class="cursor-pointer block xl:hidden text-700" pStyleClass="@next" enterClass="hidden" leaveToClass="hidden" [hideOnOutsideClick]="true">
+    <i class="pi pi-bars text-4xl"></i>
+  </a>
+  <div class="align-items-center flex-grow-1 justify-content-between hidden xl:flex absolute xl:static w-full surface-overlay left-0 top-100 z-1 shadow-2 xl:shadow-none">
+    <ul class="list-none p-0 m-0 flex xl:align-items-center border-round select-none flex-column xl:flex-row">
+      <li class="xl:relative" *ngIf="user?.roles?.admin || user?.roles?.dev">
+        <a
+          pRipple
+          class="flex px-6 p-3 xl:px-3 xl:py-2 align-items-center border-round text-600 hover:text-900 hover:surface-100 font-medium cursor-pointer transition-colors transition-duration-150"
+          pStyleClass="@next"
+          enterClass="hidden"
+          enterActiveClass="scalein"
+          leaveToClass="hidden"
+          leaveActiveClass="fadeout"
+          [hideOnOutsideClick]="true"
+        >
+          <span>Administration</span>
+          <i class="pi pi-angle-down ml-auto xl:ml-3"></i>
+        </a>
+        <ul class="list-none py-3 px-6 m-0 xl:px-0 xl:py-0 border-round shadow-0 xl:shadow-2 xl:border-1 border-50 xl:absolute surface-overlay hidden origin-top w-full xl:w-15rem cursor-pointer">
+          <li *ngIf="(user?.roles)!.admin || (user?.roles)!.dev">
+            <a
+              pRipple
+              class="flex p-3 align-items-center border-round text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150 no-underline"
+              routerLink="admin/users"
+              routerLinkActive="text-500"
+            >
+              <i class="pi pi-user mr-2"></i>
+              <span class="font-medium">Users</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="xl:relative" *ngIf="user">
+        <a
+          pRipple
+          class="flex px-6 p-3 xl:px-3 xl:py-2 align-items-center text-600 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer transition-colors transition-duration-150"
+          pStyleClass="@next"
+          enterClass="hidden"
+          enterActiveClass="scalein"
+          leaveToClass="hidden"
+          leaveActiveClass="fadeout"
+          [hideOnOutsideClick]="true"
+        >
+          <span>Server</span>
+          <i class="pi pi-angle-down ml-auto xl:ml-3"></i>
+        </a>
+        <ul class="list-none py-3 px-6 m-0 xl:px-0 xl:py-0 border-round shadow-0 xl:shadow-2 xl:border-1 border-50 xl:absolute surface-overlay hidden origin-top w-full xl:w-15rem cursor-pointer">
+          <li>
+            <a
+              pRipple
+              class="flex p-3 align-items-center border-round text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150 no-underline"
+              routerLink="server/locations"
+              routerLinkActive="text-blue-500"
+            >
+              <i class="pi pi-globe mr-2"></i>
+              <span class="font-medium">Locations</span>
+            </a>
+          </li>
+          <li>
+            <a pRipple class="flex p-3 align-items-center border-round text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150" (click)="notImplemented()">
+              <i class="pi pi-server mr-2"></i>
+              <span class="font-medium">Servers</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="xl:relative" *ngIf="user">
+        <a
+          pRipple
+          class="flex px-6 p-3 xl:px-3 xl:py-2 align-items-center text-600 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer transition-colors transition-duration-150"
+          pStyleClass="@next"
+          enterClass="hidden"
+          enterActiveClass="scalein"
+          leaveToClass="hidden"
+          leaveActiveClass="fadeout"
+          [hideOnOutsideClick]="true"
+        >
+          <span>Extras</span>
+          <i class="pi pi-angle-down ml-auto xl:ml-3"></i>
+        </a>
+        <ul class="list-none py-3 px-6 m-0 xl:px-0 xl:py-0 border-round shadow-0 xl:shadow-2 xl:border-1 border-50 xl:absolute surface-overlay hidden origin-top w-full xl:w-15rem cursor-pointer">
+          <li>
+            <a
+              pRipple
+              class="flex p-3 align-items-center border-round text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150 no-underline"
+              routerLink="ark/shop"
+              routerLinkActive="text-blue-500"
+            >
+              <span class="mdi mdi-google-downasaur mr-2"></span>
+              <span class="font-medium">Ark Shop</span>
+            </a>
+          </li>
+          <li class="relative">
+            <!-- Spielleiter -->
+            <div class="w-full flex">
+              <a
+                pRipple
+                class="flex p-3 align-items-center border-round-left text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150 no-underline w-full border-round-left"
+                routerLink="spielleiter"
+                routerLinkActive="text-blue-500"
+              >
+                <i class="mdi mdi-gamepad-variant mr-2"></i>
+                <span class="font-medium">Spielleiter</span>
+              </a>
+              <a
+                pRipple
+                *ngIf="user"
+                class="flex p-3 align-items-center border-round-right text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150"
+                pStyleClass=".spielleiter"
+                enterClass="hidden"
+                enterActiveClass="scalein"
+                leaveToClass="hidden"
+                leaveActiveClass="fadeout"
+                [hideOnOutsideClick]="true"
+              >
+                <i class="pi pi-angle-down ml-auto xl:-rotate-90"></i>
+              </a>
+            </div>
+            <ul
+              class="spielleiter list-none py-3 pl-3 m-0 xl:px-0 xl:py-0 border-round shadow-0 xl:shadow-2 xl:border-1 border-50 xl:absolute surface-overlay hidden origin-top w-full xl:w-15rem cursor-pointer left-100 top-0"
+            >
+              <li>
+                <a
+                  pRipple
+                  class="flex p-3 align-items-center border-round text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150 no-underline"
+                  routerLink="spielleiter/selector"
+                  routerLinkActive="text-blue-500"
+                >
+                  <i class="mdi mdi-gamepad-variant mr-2"></i>
+                  <span class="font-medium">Spielsuche</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  pRipple
+                  class="flex p-3 align-items-center border-round text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150 no-underline"
+                  routerLink="spielleiter/companion"
+                  routerLinkActive="text-blue-500"
+                >
+                  <i class="pi pi-user mr-2"></i>
+                  <span class="font-medium">Mitspielersuche</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  pRipple
+                  class="flex p-3 align-items-center border-round text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150 no-underline"
+                  routerLink="spielleiter/events"
+                  routerLinkActive="text-blue-500"
+                >
+                  <i class="pi pi-calendar mr-2"></i>
+                  <span class="font-medium">Eventplaner</span>
+                </a>
+              </li>
+              <li class="cursor-default">
+                <p-divider align="center" type="dashed" styleClass="my-2"> Persönlich </p-divider>
+              </li>
+              <li>
+                <a
+                  pRipple
+                  class="flex p-3 align-items-center border-round text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150 no-underline"
+                  routerLink="spielleiter/my-groups"
+                  routerLinkActive="text-blue-500"
+                >
+                  <i class="pi pi-users mr-2"></i>
+                  <span class="font-medium">Meine Gruppen</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  pRipple
+                  class="flex p-3 align-items-center border-round text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150 no-underline"
+                  routerLink="spielleiter/my-games"
+                  routerLinkActive="text-blue-500"
+                >
+                  <i class="mdi mdi-bookshelf mr-2"></i>
+                  <span class="font-medium">Meine Spiele</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  pRipple
+                  class="flex p-3 align-items-center border-round text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150 no-underline"
+                  routerLink="spielleiter/my-tierlist"
+                  routerLinkActive="text-blue-500"
+                >
+                  <i class="pi pi-list mr-2"></i>
+                  <span class="font-medium">Meine Tierlist</span>
+                </a>
+              </li>
+              <ng-template [ngIf]="user.roles.admin || user.roles!.dev">
+                <li class="cursor-default">
+                  <p-divider align="center" type="dashed" styleClass="my-2"> Admin - Dev </p-divider>
+                </li>
+                <li>
+                  <a
+                    pRipple
+                    class="flex p-3 align-items-center border-round text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150 no-underline"
+                    routerLink="spielleiter/all-games"
+                    routerLinkActive="text-blue-500"
+                  >
+                    <i class="pi pi-folder-open mr-2"></i>
+                    <span class="font-medium">Spielverwaltung</span>
+                  </a>
+                </li>
+              </ng-template>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li class="xl:relative" *ngIf="user">
+        <a
+          pRipple
+          class="flex px-6 p-3 xl:px-3 xl:py-2 align-items-center text-600 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer transition-colors transition-duration-150"
+          pStyleClass="@next"
+          enterClass="hidden"
+          enterActiveClass="scalein"
+          leaveToClass="hidden"
+          leaveActiveClass="fadeout"
+          [hideOnOutsideClick]="true"
+        >
+          <span>Service</span>
+          <i class="pi pi-angle-down ml-auto xl:ml-3"></i>
+        </a>
+        <ul class="list-none py-3 px-6 m-0 xl:px-0 xl:py-0 border-round shadow-0 xl:shadow-2 xl:border-1 border-50 xl:absolute surface-overlay hidden origin-top w-full xl:w-15rem cursor-pointer">
+          <li>
+            <a
+              pRipple
+              class="flex p-3 align-items-center border-round text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150 no-underline"
+              routerLink="management/performance"
+              routerLinkActive="text-blue-500"
+            >
+              <i class="pi pi-chart-bar mr-2"></i>
+              <span class="font-medium">Performance</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="xl:relative" *ngIf="user">
+        <a
+          pRipple
+          class="flex px-6 p-3 xl:px-3 xl:py-2 align-items-center text-600 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer transition-colors transition-duration-150"
+          pStyleClass="@next"
+          enterClass="hidden"
+          enterActiveClass="scalein"
+          leaveToClass="hidden"
+          leaveActiveClass="fadeout"
+          [hideOnOutsideClick]="true"
+        >
+          <span>Playground</span>
+          <i class="pi pi-angle-down ml-auto xl:ml-3"></i>
+        </a>
+        <ul class="list-none py-3 px-6 m-0 xl:px-0 xl:py-0 border-round shadow-0 xl:shadow-2 xl:border-1 border-50 xl:absolute surface-overlay hidden origin-top w-full xl:w-15rem cursor-pointer">
+          <li>
+            <a
+              pRipple
+              class="flex p-3 align-items-center border-round text-600 hover:text-900 hover:surface-100 transition-colors transition-duration-150 no-underline"
+              routerLink="playground/sandbox"
+              routerLinkActive="text-500"
+            >
+              <i class="pi pi-chart-bar mr-2"></i>
+              <span class="font-medium">Sandbox</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="list-none p-0 m-0 flex xl:align-items-center border-round select-none flex-column xl:flex-row border-top-1 surface-border ml-auto xl:border-top-none">
+      <li class="border-top-1 surface-border xl:border-top-none">
+        <a
+          (click)="toggleColor(dark ? 'light' : 'dark')"
+          pRipple
+          class="flex px-6 p-3 xl:px-3 xl:py-2 align-items-center text-600 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer transition-colors transition-duration-150"
+        >
+          <i class="pi pi-{{ dark ? 'sun' : 'moon' }} text-base xl:text-2xl mr-2 xl:mr-0"></i>
+          <span class="block xl:hidden font-medium">{{ dark ? 'Light' : 'Dark' }}mode</span>
+        </a>
+      </li>
+      <li class="border-top-1 surface-border xl:border-top-none" *ngIf="user">
+        <a
+          pRipple
+          class="flex px-6 p-3 xl:px-3 xl:py-2 align-items-center hover:surface-100 font-medium border-round cursor-pointer transition-colors transition-duration-150 no-underline"
+          routerLink="private/profile"
+        >
+          <img
+            [src]="user.avatar_url ? user.avatar_url : 'assets/images/icons/user.png'"
+            class="mr-3 xl:mr-0 border-round antiselect"
+            [ngClass]="user.avatar_url ? 'profile-image-background' : ''"
+            style="width: 45px; height: 45px"
+            alt="Avatar"
+          />
+          <div class="block xl:hidden">
+            <div class="text-900 font-medium">{{ user.vorname }} {{ user.nachname }}</div>
+            <span class="text-600 font-medium text-sm">{{ user.username }}</span>
+          </div>
+        </a>
+      </li>
+      <li *ngIf="!user">
+        <a
+          pRipple
+          routerLink="/auth"
+          class="flex px-6 p-3 xl:px-3 xl:py-2 align-items-center text-600 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer transition-colors transition-duration-150 no-underline"
+        >
+          <i class="pi pi-sign-in text-base xl:text-2xl mr-2 xl:mr-0"></i>
+          <span class="block xl:hidden font-medium">Sign Out</span>
+        </a>
+      </li>
+      <li *ngIf="user">
+        <a
+          (click)="logout()"
+          pRipple
+          class="flex px-6 p-3 xl:px-3 xl:py-2 align-items-center text-600 hover:text-900 hover:surface-100 font-medium border-round cursor-pointer transition-colors transition-duration-150"
+        >
+          <i class="pi pi-sign-out text-base xl:text-2xl mr-2 xl:mr-0"></i>
+          <span class="block xl:hidden font-medium">Sign Out</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

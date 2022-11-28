@@ -1,0 +1,53 @@
+// .box-stretched {
+//   height: 100%;
+//   box-sizing: border-box;
+// }
+
+.nowrap-text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.bookmark {
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0;
+  transition: transform 250ms ease-in-out, opacity 250ms ease-in-out;
+}
+
+.game {
+  user-select: initial;
+  transition: background-color 250ms ease-in-out;
+  .game-image {
+    transition: transform 250ms ease-in-out;
+  }
+  .gameinfo {
+    transition: max-height 250ms ease-out;
+    max-height: 0;
+    overflow: hidden;
+  }
+  &:hover,
+  &:focus {
+    background-color: var(--gray-600);
+    .game-image {
+      // transform: scale(1.2, 1.2);
+      transform: scale(99%, 99%);
+      z-index: +1;
+    }
+    .bookmark {
+      opacity: 0.5;
+      &:hover {
+        opacity: 0.9;
+        transform: scale(1.1, 1.1);
+      }
+    }
+  }
+  &:focus {
+    .gameinfo {
+      max-height: 100px;
+      // transition: max-height 1s ease-out;
+    }
+  }
+}

@@ -1,0 +1,37 @@
+<div id="box" class="p-5 flex flex-column flex-auto mt-6 z-1">
+  <ul class="surface-card p-0 m-0 list-none flex overflow-x-auto select-none">
+    <li class="flex-1">
+      <a
+        pRipple
+        class="cursor-pointer px-4 py-3 flex align-items-center justify-content-center border-bottom-2 hover:border-500 transition-colors transition-duration-150 no-underline"
+        [ngClass]="{
+          'border-blue-500 text-blue-500 hover:border-blue-500': active === 'profile',
+          'text-700 border-transparent': active !== 'profile'
+        }"
+        (click)="active = 'profile'"
+        routerLink="/private/profile"
+      >
+        <i class="pi pi-home mr-2"></i>
+        <span class="font-medium">Profile</span>
+      </a>
+    </li>
+    <li class="flex-1">
+      <a
+        pRipple
+        class="cursor-pointer px-4 py-3 flex align-items-center justify-content-center border-bottom-2 hover:border-500 transition-colors transition-duration-150 no-underline"
+        [ngClass]="{
+          'border-blue-500 text-blue-500 hover:border-blue-500': active === 'cyved',
+          'text-700 border-transparent': active !== 'cyved'
+        }"
+        (click)="active = 'cyved'"
+        routerLink="/private/cyved"
+      >
+        <i class="pi pi-users mr-2"></i>
+        <span class="font-medium">Cyved</span>
+      </a>
+    </li>
+  </ul>
+  <div class="flex-auto overflow-x-hidden overflow-y-auto surface-section mt-1">
+    <router-outlet></router-outlet>
+  </div>
+</div>

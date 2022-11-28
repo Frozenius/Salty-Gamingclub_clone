@@ -1,0 +1,32 @@
+<div *ngIf="dev" class="m-2 antiselect flex align-items-center justify-content-center">
+  <span class="px-2 mx-1 border-round-3xl"
+    [ngStyle]="{
+      backgroundColor: lifestream ? '#0f0' : '#f00',
+      boxShadow: lifestream ? '#0f0' : '#f00' + '0px 0px 2.5px 1px',
+      color: lifestream ? '#000' : '#fff'
+    }"
+    style="text-transform: uppercase"
+    (click)="lifestream = !lifestream;">
+    Lifestream {{lifestream ? 'on' + " - " + id : 'off'}}
+  </span>
+</div>
+
+<div class="flex flex-column align-items-center justify-content-center relative" style="flex: 1">
+  <div *ngIf="!lifestream" class="absolute">
+    <div style="margin: auto; margin-bottom: 5rem;" class="pulsing-1"></div>
+    <!-- <div class="flex flex-row align-items-center justify-content-center" style="margin-bottom: 5rem;">
+      <span>Live</span>
+      <div class="ml-3 pulsing-1"></div>
+    </div> -->
+    <span class="p-inputgroup">
+      <input type="text" pInputText (keyup.enter)="setUrl(id)" placeholder="Key" [(ngModel)]="id" [pKeyFilter]="'alphanum'">
+      <button pRipple pButton (click)="setUrl(id)" type="button" icon="pi pi-search"></button>
+    </span>
+  </div>
+
+  <div *ngIf="lifestream" class="big absolute flex align-items-center justify-content-center" [@fadeInGrow] [@fadeOutGrow]>
+    <div class="big" plyr [plyrPlaysInline]="true" [plyrCrossOrigin]="true" [plyrDriver]="hlsjsDriver"
+      [plyrOptions]="options" [plyrSources]="videoSources" [plyrPoster]="poster" (plyrInit)="player = $event">
+    </div>
+  </div>
+</div>

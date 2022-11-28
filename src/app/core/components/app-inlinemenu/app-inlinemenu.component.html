@@ -1,0 +1,46 @@
+<div
+  [ngClass]="{
+    'layout-inline-menu': true,
+    'layout-inline-menu-active': appMain.activeInlineProfile
+  }"
+  *ngIf="!appMain.isMobile() && (appMain.isStatic() || appMain.isSlim() || appMain.isSidebar())"
+>
+  <a class="layout-inline-menu-action" (click)="appMain.activeInlineProfile = !appMain.activeInlineProfile">
+    <img [src]="user?.avatar_url ? user?.avatar_url : 'assets/images/icons/user.png'" alt="avatar" style="width: 44px; height: 44px" />
+    <span class="layout-inline-menu-text">{{ user ? user.username : 'Account' }}</span>
+    <i class="layout-inline-menu-icon pi pi-angle-down"></i>
+  </a>
+
+  <ul class="layout-inline-menu-action-panel" [@inline]="appMain.activeInlineProfile ? 'visibleAnimated' : 'hiddenAnimated'">
+    <li class="layout-inline-menu-action-item" *ngIf="user">
+      <a routerLink="private/profile">
+        <i class="pi pi-user pi-fw"></i>
+        <span>Profile</span>
+      </a>
+    </li>
+    <li class="layout-inline-menu-action-item">
+      <a *ngIf="app.colorScheme === 'dark'; else light" (click)="appMain.changeColorScheme($event, 'light')">
+        <i class="pi pi-sun pi-fw"></i>
+        <span>Light Mode</span>
+      </a>
+      <ng-template #light>
+        <a (click)="appMain.changeColorScheme($event, 'dark')">
+          <i class="pi pi-moon pi-fw"></i>
+          <span>Dark Mode</span>
+        </a>
+      </ng-template>
+    </li>
+    <li class="layout-inline-menu-action-item">
+      <a (click)="logout()" *ngIf="user; else login">
+        <i class="pi pi-power-off pi-fw"></i>
+        <span>Logout</span>
+      </a>
+      <ng-template #login>
+        <a routerLink="auth/login">
+          <i class="pi pi-sign-in pi-fw"></i>
+          <span>Login</span>
+        </a>
+      </ng-template>
+    </li>
+  </ul>
+</div>

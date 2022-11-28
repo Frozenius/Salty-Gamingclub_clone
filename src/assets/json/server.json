@@ -1,0 +1,71 @@
+{
+  "author": "Jonas Junker",
+  "description": "Serverauflistung im JSON Format",
+  "lastEdit": "2022.10.13",
+  "editBy": "Jonas Junker",
+  "platforms": [
+    {
+      "name": "steam",
+      "games": [
+        {
+          "name": "Garrys Mod",
+          "servers": [
+            {
+              "logo": "assets/images/Garry's_Mod_logo.svg.png",
+              "name": "Standard TTT",
+              "ip": "ttt.salty-gamingclub.de",
+              "port": "00000",
+              "description": "Standard TTT Server"
+            },
+            {
+              "logo": "assets/images/Garry's_Mod_logo.svg.png",
+              "name": "TTT Fate",
+              "ip": "fate.salty-gamingclub.de",
+              "port": "00000",
+              "description": "TTT Fate Server",
+              "longDescriptions": [
+                "Fate ist eine Erweiterung für das Standard-TTT.\nNeben den Standard-Gruppen, wie Innocent und Traitor, gibt es weitere Gruppen, die mittels Mods hinzugefügt werden können. \nJe nach dem wie ein Administrator sich entscheidet, können ganz verschiedene Rollen-Setups entstehen.\nEs gibt alleinstehende Gruppen, wie z.B. Jackal, der mit seinen Sidekicks (oder auch seinem Rudel) jagt auf alle anderen macht.\nAber es ist auch möglich, dass wir für einen gewissen Ausgleich sorgen wollen und Gruppen implementieren, die Traitor und Innocent erweitern. So ist z.B. der Survivalist ein bewaffneter Dodo (Innocent) und erhält einen Shop, der es ihm ermöglicht überlebenswichtige Items zu kaufen.\nFragt gerne in den ersten Aufwärmrunden nach unbekannten Gruppen. Vergesst dabei nicht, dass ihr euch dabei auch selber schaden könnt. Schreibt sonst auch fix einen Admin an, der euch dann, privat oder im Voice-Chat an alle, diese Gruppe erklären wird. Alternativ wird sie auch in der Mod-Beschreibung der jeweiligen Gruppe erläutert.\n",
+                "Gerne sorgen die Spezialisierungen am Anfang jeder Runde für Verwirrung. Ein kleiner Bestandteil der TTT2-Erweiterung sind Spezialisierungen. \nDiese Sorgen für eine gewisse Unvorhersebarkeit, da z.B. ein Innocent mit der FreeRunner-Spezialisierung plötzlich durch die Luft springen kann oder ein Traitor, der das BlueBull Item kauft, plötzlich behauptet FreeRunner zu sein.\nSpeziallisierungen werden am Anfang jeder Runde am oberen rechten Bildschirmrand angezeigt. Diese sind Gruppenunabhängig, traut euch also gerne dessen Funktion offen nachzufragen.\n",
+                "Das wichtigste ist: Last euch nicht entmutigen!\nNehmt euch die Zeit unbekanntes zu erforschen.\nUnsere Änderungen sind zumeist euer Vorteil oder sollen bestimmten Verhaltensweisen entgegenwirken, damit der Spielspaß länger hält.\n",
+                "In der Entwicklung von Valve spielten Mods immer eine große Rolle. So wurden beispielsweise Waffenskins und andere Grafiken in Mods gepackt, die zum Teil auch in anderen Spielen verwendet wurden. Es gab dadurch Rechtliche Probleme. Seitdem müssen Mod-Ersteller diese Grafiken mitliefern (Wenn sie ihnen gehören) oder sie verweisen auf Grafiken aus Valve-Quellen wie Counter Strike oder anderen.\nIn Spielen wie TTT können dadurch Errors und Lilaschwarze Oberflächen auftauchen. Jede dieser Oberflächen entspricht einer fehlenden Datei, was je nach Map sehr viel kleinkram sein kann.\nLeider macht nicht jeder Mod-Ersteller sich die Mühe zu plrüfen, ob die Texturen bei einer Standard-Installation dabei sind. Manchmal referenzieren sie sich sogar auf Texturen anderer Mods, die nicht benannt werden. Ob nun gewollt oder nicht, kann das Fehlen zu den oben genannten Problemen führen. \nIn der Konsole wird die fehlende Textur auf Client- und Serverseite in den meisten Fällen aufgeführt, wobei es nicht immer Texturen sein müssen die angezeigt werden.\n",
+                "Seid euch dabei immer gewahr, dass besonders Grafiken immer Potential für Schadsoftware bieten. Deshalb sind sichere Bezugsquellen und seriöse Modersteller wichtig.\n",
+                "Die Empfehlung zum richtigen Vorgehen ist:\nKauft euch alle Valve-Games (nicht unbedingt die VR), bindet sie über das Ingame menü von Garrys Mod ein und Abboniert die Collections. Dann sollten die meisten Maps ohne Probleme funktionieren und nur Wenige Texturen fehlen.\nTeilt uns gerne Fehlende Texturen mit, da sie auch Serverseitig eingebunden werden müssen, falls sie bei allen fehlen.\n",
+                "Das etwas unschönere vorgehen:\nWir haben unseren Valve-Texturen Ordner (mit Kaspersky überprüft) in einer Zip-Datei hinterlegt. \nDie Aktuellste Version befindet sich derzeit auf dem TS. Zu finden im Dateibrowser des Channels SaltyServerliste (Mitlere maustaste auf den Channel Drücken).\nIn der Zip-Datei befinden sich Ordner wie Maps, Models, etc. \nDiese müssen in den Speicherort von Garrys Mod integriert werden. Dafür empfiehlt sich ein Rechtsklick auf das Steam Symbol, Library, in der Auflistung Garrys Mod Rechtsklicken, Properties.... Local Files (links), Browse, garrysmod Ordner öffnen. Dort sollten sich die selben Ordner (oder weniger) befinden. Die Dateien aus der Zip-Datei dort entpacken (überschreiben).\n",
+                ""
+              ]
+            }
+          ]
+        },
+        {
+          "name": "ARK",
+          "servers": [
+            {
+              "logo": "assets/images/ark-server-png-4.png",
+              "name": "ARK",
+              "ip": "ark.salty-gamingclub.de",
+              "port": "00000",
+              "description": "ARK Server"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "minecraft",
+      "games": [
+        {
+          "name": "Vanilla",
+          "servers": [
+            {
+              "logo": "assets/images/Minecraft-Logo.png",
+              "name": "Vanilla",
+              "ip": "mc.salty-gamingclub.de",
+              "port": "00000",
+              "description": "Vanilla Server"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

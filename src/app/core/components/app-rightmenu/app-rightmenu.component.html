@@ -1,0 +1,40 @@
+<div class="layout-rightmenu" [ngClass]="{ 'layout-rightmenu-active': appMain.rightMenuActive }"
+     (click)="appMain.onRightMenuClick($event)">
+  <a href="#" (click)="appMain.rightMenuActive = false" class="layout-rightmenu-close">
+    <i class="pi pi-times"></i>
+  </a>
+  <div class="user-detail-wrapper">
+    <div class="user-detail-content">
+      <img [src]="user?.avatar_url ? user?.avatar_url : 'assets/images/icons/user.png'" alt="atlantis"
+           class="user-image" height="100" />
+      <span class="user-name">{{ user?.username }}</span>
+      <span class="user-number">{{ user?.email }}</span>
+    </div>
+    <!--    <div class="user-tasks">-->
+    <!--      <div class="user-tasks-item in-progress">-->
+    <!--        <a class="task-number">23</a>-->
+    <!--        <span class="task-name">Progress</span>-->
+    <!--      </div>-->
+    <!--      <div class="user-tasks-item">-->
+    <!--        <a class="task-number">6</a>-->
+    <!--        <span class="task-name">Overdue</span>-->
+    <!--      </div>-->
+    <!--      <div class="user-tasks-item">-->
+    <!--        <a class="task-number">38</a>-->
+    <!--        <span class="task-name">All deals</span>-->
+    <!--      </div>-->
+    <!--    </div>-->
+  </div>
+  <div>
+    <p-calendar [(ngModel)]="date" [inline]="true"></p-calendar>
+  </div>
+  <div class="daily-plan-wrapper">
+    <span class="today-date">Upcoming Events</span>
+    <ul>
+      <li *ngFor="let event of upcomingEvents;">
+        <span class="event-time">{{event.start}} - {{event.end}}</span>
+        <span class="event-topic">{{event.title}}</span>
+      </li>
+    </ul>
+  </div>
+</div>

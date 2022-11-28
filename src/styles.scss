@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'primeng/resources/primeng.min.css';
+@import 'primeflex/primeflex.min.css';
+@import 'primeflex/primeflex';
+@import 'primeicons/primeicons.css';
+@import 'prismjs/themes/prism-coy.min.css';
+@import "@fullcalendar/daygrid/main.min.css";
+@import "@fullcalendar/timegrid/main.min.css";
+@import "@fullcalendar/common/main.min.css";
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+@import '@mdi/font/css/materialdesignicons.min.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+// cursor-default {
+//   cursor: default !important;
+// }
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}
+
+.antiselect {
+  user-select: none;
+}
+
+img.profile-image-background {
+  background-color: rgba(128, 128, 128, 0.1);
+}

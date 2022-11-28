@@ -1,0 +1,42 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow write: if isOwner(userId);
+      allow update: if isAdmin() || isOwner(userId) && !(tryAdmin()) && isSignedIn();
+      allow delete: if isOwner(userId) || isAdmin();
+    }
+
+    /// Functions ///
+
+    function isOwner(userId){
+    	return request.auth.uid == userId;
+    }
+
+    function isSignedIn() {
+    	return request.auth != null;
+    }
+
+    function getUserData() {
+    	return get(/databases/$(database)/documents/users/$(request.auth.uid)).data
+    }
+
+    function isAdmin() {
+    	return getUserData().roles.admin
+    }
+
+    function tryAdmin() {
+    	return request.resource.data.roles.admin
+    }
+
+    function incomingData() {
+    	return request.resource.data
+    }
+
+    function existingData() {
+    	return resource.data
+    }
+
+  }
+}

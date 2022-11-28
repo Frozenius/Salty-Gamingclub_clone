@@ -1,0 +1,37 @@
+<!-- V1 -->
+<!-- <div class="p-3 *m-1 border-1 border-round surface-border flex flex-row justify-items-between **box-stretched**"
+  [ngStyle]="{'background-color': getBGColor()}">
+  <div class="flex flex-row align-items-center" style="overflow-x: hidden;">
+    <img class="m-1 mr-3" src="http://media.steampowered.com/steamcommunity/public/images/apps/{{game.appid}}/{{game.img_icon_url}}.jpg"
+      onerror="this.onerror=null; this.src='../../../../assets/images/icons/Salty.png'" alt="{{game.name}} Logo" width="32">
+    <span class="nowrap-text">{{game.name}}</span>
+  </div>
+</div> -->
+
+<!-- V2 -->
+
+<!-- <div class="p-0 col-12 md:col-6 lg:col-4 xl:col-3 xxl:col-2"> -->
+<!-- <img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{game.appid}}/{{game.img_icon_url}}.jpg" onerror="this.onerror=null; this.src='../../../../assets/images/icons/Salty.png'" alt="{{game.name}} Logo" width="32"> -->
+<!-- <div class="nowrap-text" title="{{game.name}}">{{game.name}}</div> -->
+
+<div class="game mb-2 border-round cursor-pointer" tabindex="0">
+  <div class="relative game-image antiselect" style="border: 0.25rem solid transparent">
+    <i pRipple class="bookmark m-2 p-1 pi pi-bookmark border-round" style="background-color: var(--gray-600)" title="Für die aktuelle Suche merken"></i>
+    <img loading="lazy" class="border-round" style="width: 100%" src="{{ game.thumbnail_url }}" onerror="this.onerror=null; this.remove();" alt="{{ game.name }} Thumbnail" title="{{ game.name }}" />
+  </div>
+  <div class="p-2 pt-0">
+    <span class="text-uppercase nowrap-text" title="{{ game.name }}">{{ game.name }}</span>
+  </div>
+  <div class="gameinfo m-1" style="background-color: rgba(128 128 128 / 60%)">
+    <p class="m-0">
+      Spieler: <span>{{ game.minPlayers }} - {{ game.maxPlayers }}</span>
+    </p>
+    <p class="m-0">
+      Dedicated: <span>{{ game.dedicated }}</span>
+    </p>
+  </div>
+</div>
+
+<!-- <iframe title="Steam store widget" class="store-widget" id="js-store-iframe"
+  data-src="https://store.steampowered.com/widget/548430/"
+  width="940" height="190" src="https://store.steampowered.com/widget/548430/"></iframe> -->

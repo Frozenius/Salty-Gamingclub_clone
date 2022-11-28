@@ -1,0 +1,54 @@
+#spl-wrapper {
+  min-height: 100%;
+
+  /* Equal to height of footer */
+  /* But also accounting for potential margin-bottom of last child */
+  //margin-bottom: -1rem;
+}
+
+#spl-version {
+  //height: 1rem;
+  opacity: 50%;
+}
+
+/* Herz Pochen im Footer */
+#herz {
+  height: 0.8em;
+  animation: animateHeart 1.2s infinite;
+}
+
+@keyframes animateHeart {
+  0% {
+    transform: scale(0.8);
+  }
+  5% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(0.8);
+  }
+  20% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(0.8);
+  }
+}
+
+// .animation {
+//   opacity: 0;
+//   transition: all 2s;
+// }
+
+// @media(prefers-reduced-motion) {
+//   .animation {
+//     transition: none;
+//   }
+// }
+
+// .animation-show {
+//   opacity: 1;
+// }

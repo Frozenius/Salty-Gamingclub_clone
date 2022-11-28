@@ -1,0 +1,56 @@
+<div class="surface-card p-4 shadow-2 border-round">
+  <div class="grid form grid p-fluid">
+    <div class="field mb-4 col-12 md:col-6">
+      <label for="vorname" class="font-medium">Vorname</label>
+      <input #vorname id="vorname" type="text" pInputText [placeholder]="(authService.user$ | async)?.vorname" />
+    </div>
+    <div class="field mb-4 col-12 md:col-6">
+      <label for="nachname" class="font-medium">Nachname</label>
+      <input #nachname id="nachname" type="text" pInputText [placeholder]="(authService.user$ | async)?.nachname" />
+    </div>
+    <div class="field mb-4 col-12 md:col-6">
+      <label for="username" class="font-medium">Username</label>
+      <input #username id="username" type="text" pInputText [placeholder]="(authService.user$ | async)?.username" />
+    </div>
+    <div class="field mb-4 col-12 md:col-6">
+      <label for="email" class="font-medium">Email</label>
+      <input id="email" type="email" pInputText [placeholder]="(authService.user$ | async)?.email" disabled />
+    </div>
+    <div class="surface-100 mb-3 col-12" style="height: 2px"></div>
+    <div class="field mb-4 col-1 md:col-1">
+      <label for="avatar" class="font-medium">Avatar</label>
+      <div class="flex align-items-center">
+        <img
+          [src]="(authService.user$ | async)?.avatar_url ? (authService.user$ | async)?.avatar_url : 'assets/images/icons/user.png'"
+          class="mr-4 border-round antiselect"
+          [ngClass]="(authService.user$ | async)?.avatar_url ? 'profile-image-background' : ''"
+          style="width: 50px; height: 50px"
+          alt="Useravatar"
+        />
+      </div>
+    </div>
+    <div class="field mb-4 col-10 col-offset-1 md:col-5 md:col-offset-0">
+      <label class="font-medium" for="avatar">
+        {{ uploading ? 'Uploading ...' : 'Upload' }}
+      </label>
+      <div class="flex align-items-center">
+        <input class="w-auto" id="avatar" type="file" accept="image/*" [disabled]="uploading" (change)="uploadAvatar($event)" />
+        <p-progressBar *ngIf="percent > 0" [value]="percent"></p-progressBar>
+      </div>
+    </div>
+    <div class="field mb-4 col-12 md:col-6">
+      <label class="font-medium">Roles</label>
+      <div class="badges">
+        <p-badge *ngIf="(authService.user$ | async)?.roles?.user" value="User" severity="success" styleClass="mr-2"></p-badge>
+        <p-badge *ngIf="(authService.user$ | async)?.roles?.dev" value="Developer" severity="info" styleClass="mr-2"></p-badge>
+        <p-badge *ngIf="(authService.user$ | async)?.roles?.admin" value="Admin" severity="danger"></p-badge>
+      </div>
+    </div>
+    <div class="surface-100 mb-3 col-12" style="height: 2px"></div>
+    <div class="col-12">
+      <button pButton pRipple label="Speichern" class="w-auto mt-3 mr-2" (click)="updateProfile(vorname.value, nachname.value, username.value)"></button>
+      <button pButton pRipple label="Profil Löschen" class="w-auto mt-3 p-button-danger" (click)="confirm($event)" icon="pi pi-trash"></button>
+    </div>
+  </div>
+</div>
+<p-confirmPopup></p-confirmPopup>
